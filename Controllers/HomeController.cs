@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,7 +18,7 @@ namespace WebToDoList.Controllers
             };
         }
         [HttpPost]
-        public ActionResult InsertDbAuth(string id, string date)
+        public ActionResult InsertToDo(string id, string date)
         {
             var searchData = ToDoService.GetToDo(id);
 
@@ -31,11 +31,23 @@ namespace WebToDoList.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         [HttpPost]
-        public ActionResult DeleteDbAuth(string id)
-        { 
+        public ActionResult UpdateToDo(string id)
+        {
+            var updateData = ToDoService.UpdateToDo(id);
+            var searchData = ToDoService.GetToDo(id);
+            return new JsonResult()
+            {
+                Data = searchData,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        [HttpPost]
+        public ActionResult DeleteToDo(string id)
+        {
             var deleteData = ToDoService.DeleteToDo(id);
-            var searchData= ToDoService.GetToDo(id);
+            var searchData = ToDoService.GetToDo(id);
             return new JsonResult()
             {
                 Data = searchData,
